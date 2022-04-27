@@ -1,0 +1,27 @@
+syntax="proto3";
+
+import "google/protobuf/timestamp.proto";
+option go_package ="github.com/fukaraca/gRPC-hello-Mars";
+
+message MessageRequest{
+  string text =1;
+  string sender =2;
+  google.protobuf.Timestamp sending_time =3;
+}
+
+message CreateMessageRequest{
+  MessageRequest request=1;
+}
+
+message MessageResponse{
+  bool read=1;
+}
+
+message CreateMessageResponse{
+  MessageResponse response=1;
+}
+
+service MessagingService{
+  rpc SendMessage(CreateMessageRequest) returns (CreateMessageResponse){};
+
+}
